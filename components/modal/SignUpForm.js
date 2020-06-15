@@ -72,46 +72,59 @@ const SignUpForm = forwardRef(({open, signUpThunk}, ref) => {
   return (
     <div id="modal-body">
       <form ref={ref} type="submit">
-        <div id="item">
-          <input
-            placeholder="First Name"
-            value={firstName}
-            onChange={e => setFirstName(e.target.value)}
-          />
-          <input
-            placeholder="Last Name"
-            value={lastName}
-            onChange={e => setLastName(e.target.value)}
-          />
+        <h2>Sign up for a Free Account</h2>
+        <div className="item">
+          <div className="input">
+            <input
+              placeholder="First Name"
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+            />
+            <input
+              placeholder="Last Name"
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+            />
+          </div>
+          <small>Please enter your full name.</small>
         </div>
-        <div id="item">
-          <input
-            placeholder="Email Address"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
+        <div className="item">
+          <div className="input">
+            <input
+              placeholder="Email Address"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <small>Please enter a valid e-mail.</small>
         </div>
-        <div id="item">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
+        <div className="item">
+          <div className="input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          <small>Click here for password requirements.</small>
         </div>
-        <div id="item">
-          <input
-            type="password"
-            name="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
-          />
+        <div className="item">
+          <div className="input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <small>Passwords did not match.</small>
         </div>
-        <div id="item" className="button">
+        <div className="button">
           <button type="submit" onSubmit={onSubmit}>
-            Submit
+            Register
           </button>
         </div>
       </form>
@@ -140,23 +153,58 @@ const SignUpForm = forwardRef(({open, signUpThunk}, ref) => {
             border: 1px solid black;
             margin: 10px;
           }
-          #item {
+          h2 {
+            align-self: flex-start;
+            font-size: 20px;
+          }
+          .item {
             margin: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
+          .error {
+            border: 1px solid red;
+          }
+          .input {
+            display: flex;
           }
           input {
             margin: 5px;
-            border: 1px solid black;
+            border: 1px solid gray;
             padding: 10px;
+            width: 100%;
+          }
+          input:focus,
+          input:active {
+            outline: none;
+            border: 1px solid black;
+          }
+          small {
+            visibility: hidden;
+            font-size: 70%;
+            color: red;
+            margin: 42px 10px 0px 10px;
+            position: absolute;
           }
           .button {
             margin: 5px;
             align-self: flex-end;
+          }
+          button {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            background-color: blue;
           }
         `}
       </style>
     </div>
   );
 });
+
+
 
 const mapState = state => ({
   user: state.user

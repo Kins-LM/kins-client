@@ -36,10 +36,8 @@ const Navbar = () => {
       {open ? <SignUpForm ref={signUpModal} open={open} /> : null}
       <div id="nav-bar">
         <img src="kins_logo1.svg" alt="logo" width="70" />
-        <div id="links">
-          <Link href="/">
-            <button type="button">Log In</button>
-          </Link>
+        <div id="nav-buttons">
+          <button type="button">Log In</button>
           <button type="button" ref={registerRef} onClick={handleRegister}>
             Register
           </button>
@@ -48,10 +46,10 @@ const Navbar = () => {
       <style jsx>
         {`
           #nav-bar {
+            padding: 20px 20px 20px 20px;
             display: flex;
             justify-content: space-between;
-          }
-          links {
+            align-items: center;
           }
           button {
             background-color: transparent;
