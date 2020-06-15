@@ -20,7 +20,6 @@ const Navbar = () => {
   };
 
   const handleRegister = e => {
-    // e.stopPropagation();
     e.preventDefault();
     setOpen(true);
   };
@@ -34,6 +33,7 @@ const Navbar = () => {
 
   return (
     <div>
+      {open ? <SignUpForm ref={signUpModal} open={open} /> : null}
       <div id="nav-bar">
         <img src="kins_logo1.svg" alt="logo" width="70" />
         <div id="links">
@@ -45,7 +45,6 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      {open ? <SignUpForm ref={signUpModal} open={open} /> : null}
       <style jsx>
         {`
           #nav-bar {

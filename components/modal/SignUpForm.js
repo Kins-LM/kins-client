@@ -70,47 +70,87 @@ const SignUpForm = forwardRef(({open, signUpThunk}, ref) => {
   };
 
   return (
-    <div ref={ref} id="container">
-      <form type="submit">
-        <input
-          placeholder="First Name"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
-        />
-        <input
-          placeholder="Last Name"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-        />
-        <input
-          placeholder="Email Address"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={e => setConfirmPassword(e.target.value)}
-        />
-        <button type="submit" onClick={onSubmit}>
-          Submit
-        </button>
+    <div id="modal-body">
+      <form ref={ref} type="submit">
+        <div id="item">
+          <input
+            placeholder="First Name"
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+          />
+          <input
+            placeholder="Last Name"
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+          />
+        </div>
+        <div id="item">
+          <input
+            placeholder="Email Address"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </div>
+        <div id="item">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
+        <div id="item">
+          <input
+            type="password"
+            name="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <div id="item" className="button">
+          <button type="submit" onSubmit={onSubmit}>
+            Submit
+          </button>
+        </div>
       </form>
 
       <style jsx>
         {`
-          #container {
-            background-color: pink;
-            width: 150px;
+          #modal-body {
+            margin: 0;
+            padding: 0;
+            background-color: rgba(211, 211, 211, 0.4);
+            width: 100%;
+            position: fixed;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+          }
+          form {
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            border: 1px solid black;
+            margin: 10px;
+          }
+          #item {
+            margin: 10px;
+          }
+          input {
+            margin: 5px;
+            border: 1px solid black;
+            padding: 10px;
+          }
+          .button {
+            margin: 5px;
+            align-self: flex-end;
           }
         `}
       </style>

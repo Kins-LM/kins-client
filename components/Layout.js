@@ -12,10 +12,21 @@ const Layout = ({children}) => {
         <Head>
           <title>Kins</title>
         </Head>
-        <Navbar />
-        {children}
-        <Footer />
-        <style jsx>{``}</style>
+        <body>
+          <div>
+            <Navbar />
+            {children}
+            <Footer />
+          </div>
+        </body>
+        <style jsx>
+          {`
+            body {
+              margin: 0;
+              padding: 0;
+            }
+          `}
+        </style>
       </Provider>
     </div>
   );
