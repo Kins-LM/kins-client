@@ -1,10 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useState, forwardRef} from 'react';
 import {connect} from 'react-redux';
 import {signUp} from '../../store/user';
 
-const SignUpForm = props => {
-  const {open, signUpThunk} = props;
-
+const SignUpForm = forwardRef(({open, signUpThunk}, ref) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,14 +12,14 @@ const SignUpForm = props => {
   const onSubmit = e => {
     e.preventDefault();
     if (validInput()) {
-      console.log('good');
-      // const userData = {
-      //   first_name: firstName,
-      //   last_name: lastName,
-      //   email,
-      //   password
-      // };
-      // signUpThunk(userData);
+      const userData = {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password
+      };
+      signUpThunk(userData);
+      // verify e-mail in your e-mail
     }
   };
 
@@ -30,29 +28,28 @@ const SignUpForm = props => {
   };
 
   const validPassword = inputPassword => {
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/.test(
+    const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{6,})/.test(
       inputPassword
     );
+    if (valid && inputPassword !== '') {
+      return true;
+    }
+    return false;
   };
 
-  const pwConfirm = () => {};
+  const pwConfirm = () => {
+    return password === confirmPassword;
+  };
 
   const validInput = () => {
     if (firstName === '' || lastName === '') {
-      alert('Please enter your full name.')
+      alert('Please enter your full name.');
     }
-    if (!pwConfirm) {
-      alert('Re-enter password');
-      setPassword('');
-      setConfirmPassword('');
-      return false;
-    }
-
     if (!validEmail(email)) {
       alert('Please enter a valid e-mail.');
       return false;
     }
-    if (!validPassword) {
+    if (!validPassword(password)) {
       alert(
         `Password must contain
           at least 1 lowercase character
@@ -63,35 +60,45 @@ const SignUpForm = props => {
       );
       return false;
     }
+    if (!pwConfirm()) {
+      alert('Re-enter password');
+      setPassword('');
+      setConfirmPassword('');
+      return false;
+    }
     return true;
   };
 
-  return open ? (
-    <div id="container">
+  return (
+    <div ref={ref} id="container">
       <form type="submit">
         <input
           placeholder="First Name"
-          // value={firstName}
+          value={firstName}
           onChange={e => setFirstName(e.target.value)}
         />
         <input
           placeholder="Last Name"
-          // value={lastName}
+          value={lastName}
           onChange={e => setLastName(e.target.value)}
         />
         <input
           placeholder="Email Address"
-          // value={email}
+          value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <input
+          type="password"
+          name="password"
           placeholder="Password"
-          // value={password}
+          value={password}
           onChange={e => setPassword(e.target.value)}
         />
         <input
+          type="password"
+          name="password"
           placeholder="Confirm Password"
-          // value={confirmPassword}
+          value={confirmPassword}
           onChange={e => setConfirmPassword(e.target.value)}
         />
         <button type="submit" onClick={onSubmit}>
@@ -108,8 +115,8 @@ const SignUpForm = props => {
         `}
       </style>
     </div>
-  ) : null;
-};
+  );
+});
 
 const mapState = state => ({
   user: state.user
@@ -119,4 +126,8 @@ const mapDispatch = dispatch => ({
   signUpThunk: data => dispatch(signUp(data))
 });
 
-export default connect(mapState, mapDispatch)(SignUpForm);
+// const forwardSignUpForm = forwardRef(SignUpForm);
+export default connect(mapState, mapDispatch, null, {forwardRef: true})(
+  SignUpForm
+);
+// export default SignUpForm;

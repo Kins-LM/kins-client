@@ -5,9 +5,7 @@ import store from '../store';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const Layout = props => {
-  const {children} = props;
-
+const Layout = ({children}) => {
   return (
     <div>
       <Provider store={store}>
