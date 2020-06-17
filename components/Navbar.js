@@ -33,7 +33,7 @@ const Navbar = () => {
 
   return (
     <div>
-      {open ? <SignUpForm ref={signUpModal} open={open} /> : null}
+      {open ? <SignUpForm ref={signUpModal} /> : null}
       <div id="nav-bar">
         <img src="kins_logo1.svg" alt="logo" width="70" />
         <div id="nav-buttons">

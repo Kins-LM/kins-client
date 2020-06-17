@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <div id="footer">
+    <footer>
       <Link href="/">
         <button type="button">Contact</button>
       </Link>
@@ -17,7 +17,7 @@ const Footer = () => {
       </Link>
       <style jsx>
         {`
-          #footer {
+          footer {
             padding-top: 10px;
             display: flex;
             justify-content: center;
@@ -33,7 +33,7 @@ const Footer = () => {
           }
         `}
       </style>
-    </div>
+    </footer>
   );
 };
 
