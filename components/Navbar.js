@@ -1,5 +1,4 @@
-import {useState, useEffect, createRef, useRef} from 'react';
-import Link from 'next/link';
+import {useState, useEffect, useRef} from 'react';
 import SignUpForm from './modal/SignUpForm';
 
 const Navbar = () => {

@@ -9,6 +9,7 @@ import {
   setError
 } from '../../util/userValidation';
 import styles from './SignUpForm.module.css';
+import SignUpSuccess from './SignUpSuccess';
 
 const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [firstName, setFirstName] = useState('');
@@ -16,6 +17,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const nameRef = useRef();
   const emailRef = useRef();
@@ -63,79 +65,83 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
         password
       };
       signUpThunk(userData);
-      // TODO: tell user to verify email
+      setSignUpSuccess(true);
     }
   };
 
   return (
     <div className={styles['modal-body']}>
-      <form
-        ref={formRef}
-        type="submit"
-        onSubmit={onSubmit}
-        className={styles.form}
-      >
-        <h2 className={styles.h2}>Sign up for a Free Account</h2>
-        <div ref={nameRef} className={styles.item}>
-          <div className={styles['input-item']}>
-            <input
-              className={styles.input}
-              placeholder="First Name"
-              value={firstName}
-              onChange={e => setFirstName(e.target.value)}
-            />
-            <input
-              className={styles.input}
-              placeholder="Last Name"
-              value={lastName}
-              onChange={e => setLastName(e.target.value)}
-            />
+      {signUpSuccess ? (
+        <SignUpSuccess />
+      ) : (
+        <form
+          ref={formRef}
+          type="submit"
+          onSubmit={onSubmit}
+          className={styles.form}
+        >
+          <h2 className={styles.h2}>Sign up for a Free Account</h2>
+          <div ref={nameRef} className={styles.item}>
+            <div className={styles['input-item']}>
+              <input
+                className={styles.input}
+                placeholder="First Name"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+              />
+              <input
+                className={styles.input}
+                placeholder="Last Name"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
+              />
+            </div>
+            <small className={styles.small} />
           </div>
-          <small className={styles.small} />
-        </div>
-        <div ref={emailRef} className={styles.item}>
-          <div className={styles['input-item']}>
-            <input
-              className={styles.input}
-              placeholder="Email Address"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
+          <div ref={emailRef} className={styles.item}>
+            <div className={styles['input-item']}>
+              <input
+                className={styles.input}
+                placeholder="Email Address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <small className={styles.small} />
           </div>
-          <small className={styles.small} />
-        </div>
-        <div ref={pwRef} className={styles.item}>
-          <div className={styles['input-item']}>
-            <input
-              className={styles.input}
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
+          <div ref={pwRef} className={styles.item}>
+            <div className={styles['input-item']}>
+              <input
+                className={styles.input}
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <small className={styles.small} />
           </div>
-          <small className={styles.small} />
-        </div>
-        <div ref={pwcRef} className={styles.item}>
-          <div className={styles['input-item']}>
-            <input
-              className={styles.input}
-              type="password"
-              name="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
-            />
+          <div ref={pwcRef} className={styles.item}>
+            <div className={styles['input-item']}>
+              <input
+                className={styles.input}
+                type="password"
+                name="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            <small className={styles.small} />
           </div>
-          <small className={styles.small} />
-        </div>
-        <div className="button-item">
-          <button type="submit" className={styles.button}>
-            Register
-          </button>
-        </div>
-      </form>
+          <div className={styles['button-item']}>
+            <button type="submit" className={styles.button}>
+              Register
+            </button>
+          </div>
+        </form>
+      )}
     </div>
   );
 });

@@ -17,10 +17,7 @@ const gotSignUp = userData => {
 // Thunk Creator
 export const signUp = userData => async dispatch => {
   try {
-    const {data} = await axios.post(
-      `${process.env.API_HOST}/api/signup`,
-      userData
-    );
+    const {data} = await axios.post(`localhost:8000/api/signup`, userData);
     dispatch(gotSignUp(data));
   } catch (error) {
     console.error(error);
