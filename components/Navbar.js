@@ -1,12 +1,17 @@
 import {useState, useEffect, useRef} from 'react';
+import SignInForm from './modal/SignInForm';
 import SignUpForm from './modal/SignUpForm';
 
 const Navbar = () => {
+  const signInModal = useRef();
+  const signInRef = useRef();
   const signUpModal = useRef();
   const registerRef = useRef();
-  const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
 
   const handleClick = e => {
+    // TODO: clean this up
     if (!signUpModal.current) {
       return;
     }
@@ -14,13 +19,26 @@ const Navbar = () => {
       !signUpModal.current.contains(e.target) &&
       !registerRef.current.contains(e.target)
     ) {
-      setOpen(false);
+      setOpenRegister(false);
+    }
+    if (!signInModal.current) {
+      return;
+    }
+    if (
+      !signInModal.current.contains(e.target) &&
+      !signInRef.current.contains(e.target)
+    ) {
+      setOpenSignIn(false);
     }
   };
 
+  const handleSignIn = e => {
+    e.preventDefault();
+    setOpenSignIn(true);
+  };
   const handleRegister = e => {
     e.preventDefault();
-    setOpen(true);
+    setOpenRegister(true);
   };
 
   useEffect(() => {
@@ -32,11 +50,14 @@ const Navbar = () => {
 
   return (
     <div>
-      {open ? <SignUpForm ref={signUpModal} /> : null}
+      {openSignIn ? <SignInForm ref={signInModal} /> : null}
+      {openRegister ? <SignUpForm ref={signUpModal} /> : null}
       <div id="nav-bar">
         <img src="kins_logo1.svg" alt="logo" width="70" />
         <div id="nav-buttons">
-          <button type="button">Log In</button>
+          <button type="button" ref={signInRef} onClick={handleSignIn}>
+            Log In
+          </button>
           <button type="button" ref={registerRef} onClick={handleRegister}>
             Register
           </button>

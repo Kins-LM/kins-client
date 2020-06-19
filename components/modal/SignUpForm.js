@@ -39,6 +39,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
     }
 
     if (!validPassword(password)) {
+      // TODO: add tooltip
       res = setError(pwRef, 'Click here for password requirements.');
     } else {
       setSuccess(pwRef);
