@@ -1,0 +1,19 @@
+.nav-bar {
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  transition-duration: 0.4s;
+}
+.button:hover {
+  color: pink;
+}
+.button:focus,
+.button:active {
+  color: blue;
+  outline: none;
+}

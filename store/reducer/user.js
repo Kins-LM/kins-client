@@ -24,7 +24,10 @@ const gotSignUp = userData => {
 // Thunk Creator
 export const signIn = userData => async dispatch => {
   try {
-    const {data} = await axios.get(`localhost:8000/api/signin`, userData);
+    const {data} = await axios.post(
+      `http://localhost:8000/api/signin`,
+      userData
+    );
     dispatch(gotSignIn(data));
   } catch (error) {
     console.error(error);
@@ -32,7 +35,10 @@ export const signIn = userData => async dispatch => {
 };
 export const signUp = userData => async dispatch => {
   try {
-    const {data} = await axios.post(`localhost:8000/api/signup`, userData);
+    const {data} = await axios.post(
+      `http://localhost:8000/api/signup`,
+      userData
+    );
     dispatch(gotSignUp(data));
   } catch (error) {
     console.error(error);

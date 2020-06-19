@@ -1,6 +1,6 @@
 import {useState, forwardRef, useRef} from 'react';
 import {connect} from 'react-redux';
-import {signUp} from '../../store/user';
+import {signUp} from '../../store/reducer/user';
 import {
   validEmail,
   validPassword,
