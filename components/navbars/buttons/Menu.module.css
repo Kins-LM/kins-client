@@ -1,0 +1,42 @@
+.menu {
+  padding-bottom: 20px;
+}
+.menu:hover .button{
+  color:#8bc7c9;
+}
+.menu-content {
+  display: none;
+  position: absolute;
+  margin: 1;
+  padding: 0;
+  background-color: #ceebec;
+  border: #56ffcc solid 1px;
+}
+.menu:hover .menu-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu-content:hover {
+  display: flex;
+  flex-direction: column;
+}
+.button {
+  background-color: transparent;
+  border: none;
+  transition-duration: 0.4s;
+}
+.button:focus,
+.button:active {
+  outline: none;
+}
+.li {
+  list-style-type: none;
+  margin: 10px;
+  padding: 10px;
+}
+.a {
+  color: black;
+  font-size: smaller;
+  text-decoration: none;
+}

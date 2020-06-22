@@ -4,13 +4,16 @@
   justify-content: space-between;
   align-items: center;
 }
+.nav-buttons {
+  display: flex;
+}
 .button {
   background-color: transparent;
   border: none;
   transition-duration: 0.4s;
 }
 .button:hover {
-  color: pink;
+  color: #8bc7c9;
 }
 .button:focus,
 .button:active {

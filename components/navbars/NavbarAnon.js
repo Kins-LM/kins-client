@@ -68,6 +68,9 @@ const NavbarLoggedOut = () => {
           >
             Register
           </button>
+          <button className={styles.button} type="button">
+            Cart
+          </button>
         </div>
       </div>
     </div>
