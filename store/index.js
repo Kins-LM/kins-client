@@ -2,10 +2,12 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 
 import thunkMiddleWare from 'redux-thunk';
 
-import userReducer from './reducer/user';
+import authReducer from './reducer/auth';
+// import navbarReducer from './reducer/navbar';
 
 const reducer = combineReducers({
-  user: userReducer
+  auth: authReducer,
+  // navbar: navbarReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleWare));

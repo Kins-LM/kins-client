@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import Head from 'next/head';
 
 import store from '../store';
-import Navbar from './Navbar';
+import Navbar from './navbars/Navbar';
 import Footer from './Footer';
 
 const Layout = ({children}) => {

@@ -1,11 +1,10 @@
 import axios from 'axios';
 
-// initial State
-const initialState = {};
+// TODO: loading and error property
 
 // Action Types
-const SIGN_IN = 'SIGN_IN';
-const SIGN_UP = 'SIGN_UP';
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';
 
 // Action Creator
 const gotSignIn = userData => {
@@ -44,18 +43,3 @@ export const signUp = userData => async dispatch => {
     console.error(error);
   }
 };
-
-const userReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SIGN_IN: {
-      return action.userData;
-    }
-    case SIGN_UP: {
-      return action.userData;
-    }
-    default:
-      return state;
-  }
-};
-
-export default userReducer;

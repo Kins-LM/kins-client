@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
-import SignInForm from './modal/SignInForm';
-import SignUpForm from './modal/SignUpForm';
+import SignInForm from '../modal/SignInForm';
+import SignUpForm from '../modal/SignUpForm';
 import styles from './Navbar.module.css';
 
 const NavbarLoggedOut = () => {
@@ -38,9 +38,10 @@ const NavbarLoggedOut = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClick);
+    // using 'mousedown' prevents the modal from closing if user started click inside modal but ended outside
+    document.addEventListener('mousedown', handleClick);
     return () => {
-      document.removeEventListener('click', handleClick);
+      document.removeEventListener('mousedown', handleClick);
     };
   }, []);
 

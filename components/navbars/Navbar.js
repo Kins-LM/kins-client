@@ -7,6 +7,9 @@ import NavbarLoggedOut from './NavbarLoggedOut';
 const Navbar = ({status}) => {
   const navbar = () => {
     switch (status) {
+      case 'anon': {
+        return <NavbarLoggedOut />;
+      }
       case 'shopper': {
         return null;
       }

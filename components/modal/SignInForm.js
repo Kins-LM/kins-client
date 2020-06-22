@@ -1,8 +1,12 @@
 import {useState, forwardRef, useRef} from 'react';
 // import Router from 'next/router';
 import {connect} from 'react-redux';
-import {signIn} from '../../store/reducer/user';
+import {signIn} from '../../store/action/auth';
 import styles from './SignUpForm.module.css';
+import {
+  setSuccess,
+  setError
+} from '../../util/userValidation';
 
 const SignInForm = forwardRef(({signInThunk}, formRef) => {
   const emailRef = useRef();
@@ -11,17 +15,23 @@ const SignInForm = forwardRef(({signInThunk}, formRef) => {
   const [password, setPassword] = useState('');
 
   const onSubmit = e => {
-    if (email !== '') {
-      const userData = {
-        email: email.trim(),
-        password
-      };
-      signInThunk(userData);
-      e.preventDefault();
-      // Router.push('/account');
-    } else {
-      // set error message
+    e.preventDefault();
+    setSuccess(emailRef);
+    setSuccess(pwRef);
+    if (email.trim() === '') {
+      setError(emailRef, 'Please enter your e-mail.');
+      return;
     }
+    if (password.trim() === '') {
+      setError(pwRef, 'Please enter your password.');
+      return;
+    }
+    const userData = {
+      email: email.trim(),
+      password
+    };
+    signInThunk(userData);
+    // Router.push('/account');
   };
 
   return (

@@ -1,6 +1,6 @@
 import {useState, forwardRef, useRef} from 'react';
 import {connect} from 'react-redux';
-import {signUp} from '../../store/reducer/user';
+import {signUp} from '../../store/action/auth';
 import {
   validEmail,
   validPassword,
@@ -148,7 +148,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
 });
 
 const mapState = state => ({
-  user: state.user
+  // user: state.user
 });
 
 const mapDispatch = dispatch => ({
