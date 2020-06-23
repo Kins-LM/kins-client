@@ -65,8 +65,11 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
         email: email.trim(),
         password
       };
-      signUpThunk(userData);
-      setSignUpSuccess(true);
+      const result = signUpThunk(userData);
+      if (result === 'sucess') {
+        setSignUpSuccess(true);
+      }
+      console.log(result);
     }
   };
 

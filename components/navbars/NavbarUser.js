@@ -1,4 +1,4 @@
-import NavbarMenu from './buttons/NavbarMenu';
+import NavbarMenu from './navbar util/NavbarMenu';
 import styles from './Navbar.module.css';
 
 const NavbarUser = () => {
@@ -7,12 +7,12 @@ const NavbarUser = () => {
   const links = [
     ['New Orders', 'In Progress', 'Completed Orders'],
     ['Store Website', 'Store Settings', 'Orders'],
-    ['General', 'Orders', 'Settings']
+    ['General', 'Orders', 'Settings', 'Log Out']
   ];
   const routes = [
     ['/', '/', '/'],
     ['/', '/', '/'],
-    ['/', '/', '/']
+    ['/', '/', '/', '/logout']
   ];
   const createMenus = () => {
     return menuNames.map((menuName, i) => {

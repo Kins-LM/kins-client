@@ -1,12 +1,8 @@
 import {useState, forwardRef, useRef} from 'react';
-// import Router from 'next/router';
 import {connect} from 'react-redux';
 import {signIn} from '../../store/action/auth';
 import styles from './SignUpForm.module.css';
-import {
-  setSuccess,
-  setError
-} from '../../util/userValidation';
+import {setSuccess, setError} from '../../util/userValidation';
 
 const SignInForm = forwardRef(({signInThunk}, formRef) => {
   const emailRef = useRef();
@@ -31,7 +27,6 @@ const SignInForm = forwardRef(({signInThunk}, formRef) => {
       password
     };
     signInThunk(userData);
-    // Router.push('/account');
   };
 
   return (

@@ -1,45 +1,100 @@
 import axios from 'axios';
+// Action Types
+import * as auth from './authConstants';
 
 // TODO: loading and error property
 
-// Action Types
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_UP = 'SIGN_UP';
-
 // Action Creator
-const gotSignIn = userData => {
+const gotSignIn = loading => {
   return {
-    type: SIGN_IN,
+    type: auth.SIGN_IN,
+    loading
+  };
+};
+const gotSignInSuccess = userData => {
+  return {
+    type: auth.SIGN_IN_SUCCESS,
     userData
   };
 };
-const gotSignUp = userData => {
+const gotSignInError = error => {
   return {
-    type: SIGN_UP,
+    type: auth.SIGN_IN_ERROR,
+    error
+  };
+};
+
+const gotSignUp = loading => {
+  return {
+    type: auth.SIGN_UP,
+    loading
+  };
+};
+const gotSignUpSuccess = userData => {
+  return {
+    type: auth.SIGN_UP_SUCCESS,
     userData
+  };
+};
+const gotSignUpError = error => {
+  return {
+    type: auth.SIGN_UP_ERROR,
+    error
+  };
+};
+
+const gotSignOut = loading => {
+  return {
+    type: auth.SIGN_OUT,
+    loading
+  };
+};
+const gotSignOutSuccess = userData => {
+  return {
+    type: auth.SIGN_OUT_SUCCESS,
+    userData
+  };
+};
+const gotSignOutError = error => {
+  return {
+    type: auth.SIGN_OUT_ERROR,
+    error
   };
 };
 
 // Thunk Creator
 export const signIn = userData => async dispatch => {
+  dispatch(gotSignIn(true))
   try {
     const {data} = await axios.post(
       `http://localhost:8000/api/signin`,
       userData
     );
-    dispatch(gotSignIn(data));
+    dispatch(gotSignInSuccess(data));
   } catch (error) {
-    console.error(error);
+    dispatch(gotSignInError(error));
   }
 };
+
 export const signUp = userData => async dispatch => {
+  dispatch(gotSignUp(true))
   try {
     const {data} = await axios.post(
       `http://localhost:8000/api/signup`,
       userData
     );
-    dispatch(gotSignUp(data));
+    dispatch(gotSignUpSuccess(data));
   } catch (error) {
-    console.error(error);
+    dispatch(gotSignUpError(error));
+  }
+};
+
+export const signOut = () => async dispatch => {
+  dispatch(gotSignOut(true));
+  try {
+    const {data} = await axios.get(`http://localhost:8000/api/signout`);
+    dispatch(gotSignOutSuccess(data));
+  } catch (error) {
+    dispatch(gotSignOutError(error));
   }
 };

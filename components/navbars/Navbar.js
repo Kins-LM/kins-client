@@ -1,23 +1,21 @@
 import {connect} from 'react-redux';
 
-import NavbarAnon from './NavbarAnon';
+import NavbarAnonymous from './NavbarAnonymous';
 import NavbarUser from './NavbarUser';
 
-const Navbar = ({status}) => {
+const Navbar = ({auth}) => {
   const navbar = () => {
-    const status = 'logged in';
-    if (status === 'logged in') {
+    if (auth) {
       return <NavbarUser />;
     }
-    return <NavbarAnon />;
+    return <NavbarAnonymous />;
   };
 
   return <div>{navbar()}</div>;
 };
 
 const mapState = state => ({
-  status: state.status,
-  user: state.user
+  auth: state.auth.user
 });
 
 export default connect(mapState)(Navbar);
