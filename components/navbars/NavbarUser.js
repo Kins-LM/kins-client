@@ -1,25 +1,38 @@
-import {useState, useEffect, useRef} from 'react';
-import CourierMenu from './buttons/CourierMenu';
-import SellerStoreMenu from './buttons/SellerStoreMenu';
+import NavbarMenu from './buttons/NavbarMenu';
 import styles from './Navbar.module.css';
 
 const NavbarUser = () => {
+  // hard coded data, will be replaced later
+  const menuNames = ['Courier', 'My Store', 'My Account'];
+  const links = [
+    ['New Orders', 'In Progress', 'Completed Orders'],
+    ['Store Website', 'Store Settings', 'Orders'],
+    ['General', 'Orders', 'Settings']
+  ];
+  const routes = [
+    ['/', '/', '/'],
+    ['/', '/', '/'],
+    ['/', '/', '/']
+  ];
+  const createMenus = () => {
+    return menuNames.map((menuName, i) => {
+      return (
+        <NavbarMenu
+          key={menuName}
+          componentName={menuName}
+          menuLinks={links[i]}
+          linkRoutes={routes[i]}
+        />
+      );
+    });
+  };
+
   return (
     <div>
       <div className={styles['nav-bar']}>
         <img src="kins_logo1.svg" alt="logo" width="70" />
         <div className={styles['nav-buttons']}>
-          <CourierMenu />
-          <SellerStoreMenu />
-          <div>
-            <button
-              className={styles.button}
-              type="button"
-              // onClick={}
-            >
-              My Account
-            </button>
-          </div>
+          {createMenus()}
           <div>
             <button
               className={styles.button}

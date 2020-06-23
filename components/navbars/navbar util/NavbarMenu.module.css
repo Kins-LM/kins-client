@@ -1,7 +1,7 @@
 .menu-container {
   outline: none;
+  padding-bottom: .5em;
 }
-
 .menu-container:active,
 .menu-container:focus .button{
   color:#8bc7c9;
