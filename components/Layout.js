@@ -2,7 +2,7 @@ import {Provider} from 'react-redux';
 import Head from 'next/head';
 
 import store from '../store';
-import Navbar from './Navbar';
+import Navbar from './navbars/Navbar';
 import Footer from './Footer';
 
 const Layout = ({children}) => {
@@ -12,21 +12,14 @@ const Layout = ({children}) => {
         <Head>
           <title>Kins</title>
         </Head>
-        <body>
+        <main>
           <div>
             <Navbar />
             {children}
             <Footer />
           </div>
-        </body>
-        <style jsx>
-          {`
-            body {
-              margin: 0;
-              padding: 0;
-            }
-          `}
-        </style>
+        </main>
+        <style jsx>{``}</style>
       </Provider>
     </div>
   );
