@@ -64,7 +64,7 @@ const gotSignOutError = error => {
 
 // Thunk Creator
 export const signIn = userData => async dispatch => {
-  dispatch(gotSignIn(true))
+  dispatch(gotSignIn(true));
   try {
     const {data} = await axios.post(
       `http://localhost:8000/api/signin`,
@@ -72,12 +72,13 @@ export const signIn = userData => async dispatch => {
     );
     dispatch(gotSignInSuccess(data));
   } catch (error) {
-    dispatch(gotSignInError(error));
+    const errorMsg = error.response.data.error;
+    dispatch(gotSignInError(errorMsg));
   }
 };
 
 export const signUp = userData => async dispatch => {
-  dispatch(gotSignUp(true))
+  dispatch(gotSignUp(true));
   try {
     const {data} = await axios.post(
       `http://localhost:8000/api/signup`,
@@ -85,7 +86,8 @@ export const signUp = userData => async dispatch => {
     );
     dispatch(gotSignUpSuccess(data));
   } catch (error) {
-    dispatch(gotSignUpError(error));
+    const errorMsg = error.response.data.error;
+    dispatch(gotSignUpError(errorMsg));
   }
 };
 
@@ -95,6 +97,7 @@ export const signOut = () => async dispatch => {
     const {data} = await axios.get(`http://localhost:8000/api/signout`);
     dispatch(gotSignOutSuccess(data));
   } catch (error) {
-    dispatch(gotSignOutError(error));
+    const errorMsg = error.response.data.error;
+    dispatch(gotSignOutError(errorMsg));
   }
 };
