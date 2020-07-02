@@ -21,6 +21,7 @@ export const setError = (ref, msg) => {
   const smallTag = ref.current.children[1];
 
   inputTag[0].style.borderColor = 'red';
+
   if (inputTag[1]) {
     inputTag[1].style.borderColor = 'red';
   }
@@ -37,4 +38,9 @@ export const setSuccess = ref => {
     inputTag[1].style.borderColor = 'gray';
   }
   smallTag.innerText = '';
+};
+
+export const setReqError = (ref, msg) => {
+  const smallTag = ref.current.children[0];
+  smallTag.innerText = msg;
 };

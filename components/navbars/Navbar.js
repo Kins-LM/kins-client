@@ -5,7 +5,6 @@ import NavbarUser from './NavbarUser';
 
 const Navbar = ({auth}) => {
   const navbar = () => {
-    console.log(auth);
     if (auth) {
       return <NavbarUser />;
     }

@@ -86,8 +86,12 @@ export const signUp = userData => async dispatch => {
     );
     dispatch(gotSignUpSuccess(data));
   } catch (error) {
-    const errorMsg = error.response.data.error;
+    let errorMsg = error.response.data;
+    if (error.response.status === 400) {
+      errorMsg = 'An account with that e-mail address already exist.';
+    }
     dispatch(gotSignUpError(errorMsg));
+    return errorMsg;
   }
 };
 

@@ -16,16 +16,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
   border: 1px solid black;
   margin: 10px;
 }
 .h2 {
+  margin: 20px 5px 20px 5px;
   align-self: flex-start;
   font-size: 20px;
 }
 .item {
-  margin: 10px;
+  margin: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -44,20 +44,20 @@
   outline: none;
   border: 1px solid green;
 }
-.error {
-  margin: 5px;
-  border: 1px solid red;
-  padding: 10px;
-  width: 100%;
-}
 .small {
   font-size: 70%;
   color: red;
   margin: 42px 10px 0px 10px;
   position: absolute;
 }
+.error-item {
+  font-size: 70%;
+  color: red;
+  margin: 0px 10px 0px 10px;
+  position: absolute;
+}
 .button-item {
-  margin: 5px;
+  margin: 15px 5px 5px 5px;
   align-self: flex-end;
 }
 .button {
