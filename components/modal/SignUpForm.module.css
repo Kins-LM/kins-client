@@ -14,6 +14,7 @@
   background-color: white;
   padding: 20px;
   display: flex;
+  width: 30%;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
@@ -29,6 +30,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  border: 1px solid red;
 }
 .input-item {
   display: flex;
@@ -45,12 +47,14 @@
   border: 1px solid green;
 }
 .small {
+  width: fit-content;
   font-size: 70%;
   color: red;
   margin: 42px 10px 0px 10px;
   position: absolute;
 }
 .error-item {
+  width: inherit;
   font-size: 70%;
   color: red;
   margin: 0px 10px 0px 10px;

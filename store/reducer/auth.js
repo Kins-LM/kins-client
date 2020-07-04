@@ -12,7 +12,6 @@ const userReducer = (state = initialState, action) => {
       return {user: action.userData, error: null};
     }
     case auth.SIGN_IN_ERROR: {
-      console.log(action.error);
       return {error: action.error};
     }
     case auth.SIGN_UP: {
@@ -22,7 +21,6 @@ const userReducer = (state = initialState, action) => {
       return {user: action.userData, error: null};
     }
     case auth.SIGN_UP_ERROR: {
-      console.log('reducer err', action.error);
       return {error: action.error};
     }
     case auth.SIGN_OUT: {

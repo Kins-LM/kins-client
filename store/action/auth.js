@@ -74,6 +74,7 @@ export const signIn = userData => async dispatch => {
   } catch (error) {
     const errorMsg = error.response.data.error;
     dispatch(gotSignInError(errorMsg));
+    return errorMsg;
   }
 };
 
