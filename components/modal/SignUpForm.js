@@ -1,4 +1,4 @@
-import {useState, forwardRef, useRef} from 'react';
+import {useEffect, useState, forwardRef, useRef} from 'react';
 import {connect} from 'react-redux';
 import {signUp} from '../../store/action/auth';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../util/userValidation';
 import styles from './SignUpForm.module.css';
 import SignUpSuccess from './SignUpSuccess';
+import PWToolTips from '../tooltip/PWToolTips';
 
 const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [firstName, setFirstName] = useState('');
@@ -19,6 +20,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [showToolTips, setShowToolTips] = useState(false);
 
   const nameRef = useRef();
   const emailRef = useRef();
@@ -41,7 +43,6 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
     }
 
     if (!validPassword(password)) {
-      // TODO: add tooltip
       res = setError(pwRef, 'Click here for password requirements.');
     } else {
       setSuccess(pwRef);
@@ -75,6 +76,25 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
       }
     }
   };
+
+  const handleInputClick = e => {
+    e.preventDefault();
+    setShowToolTips(!showToolTips);
+  };
+
+  const handleOutsideClick = e => {
+    e.preventDefault();
+    if (pwRef.current && !pwRef.current.contains(e.target)) {
+      setShowToolTips(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className={styles['modal-body']}>
@@ -125,9 +145,11 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
                 placeholder="Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+                onClick={handleInputClick}
               />
             </div>
             <small className={styles.small} />
+            {showToolTips ? <PWToolTips /> : null}
           </div>
           <div ref={pwcRef} className={styles.item}>
             <div className={styles['input-item']}>
@@ -165,10 +187,3 @@ const mapDispatch = dispatch => ({
 export default connect(mapState, mapDispatch, null, {forwardRef: true})(
   SignUpForm
 );
-
-// `Password must contain
-//           at least 1 lowercase character
-//           at least 1 uppercase alphabetical character
-//           at least 1 numeric character
-//           at least 1 special character
-//           must be six characters or longer`

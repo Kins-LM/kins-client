@@ -15,6 +15,7 @@
   padding: 20px;
   display: flex;
   width: 30%;
+  min-width: 350px;
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
@@ -30,7 +31,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: 1px solid red;
 }
 .input-item {
   display: flex;
@@ -54,7 +54,11 @@
   position: absolute;
 }
 .error-item {
-  width: inherit;
+  width: 25%;
+  min-width: 350px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
   font-size: 70%;
   color: red;
   margin: 0px 10px 0px 10px;
@@ -70,4 +74,9 @@
   border-radius: 6px;
   color: white;
   background-color: blue;
+}
+.button:focus,
+.button:active {
+  outline: none;
+  border: 1px solid green;
 }

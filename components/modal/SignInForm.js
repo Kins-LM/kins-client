@@ -68,7 +68,7 @@ const SignInForm = forwardRef(({signInThunk}, formRef) => {
           <small className={styles.small} />
         </div>
         <div ref={errorRef} className={styles.item}>
-          <div className={styles['error-item']} />
+          <small className={styles['error-item']} />
         </div>
         <div className={styles['button-item']}>
           <button type="submit" className={styles.button}>
