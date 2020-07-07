@@ -7,13 +7,14 @@ const NavbarUser = () => {
   const links = [
     ['New Orders', 'In Progress', 'Completed Orders'],
     ['Store Website', 'Store Settings', 'Orders'],
-    ['General', 'Orders', 'Settings', 'Log Out']
+    ['Messages', 'Purchases', 'Account Settings', 'Log Out']
   ];
   const routes = [
     ['/', '/', '/'],
     ['/', '/', '/'],
-    ['/', '/', '/', '/logout']
+    ['/', '/', '/myAccount', '/logout']
   ];
+
   const createMenus = () => {
     return menuNames.map((menuName, i) => {
       return (
@@ -37,7 +38,7 @@ const NavbarUser = () => {
             <button
               className={styles.button}
               type="button"
-              // onClick={}
+              // TODO: cart button should take user to cart
             >
               Cart(icon)
             </button>
