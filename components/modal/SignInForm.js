@@ -2,15 +2,17 @@ import {useState, forwardRef, useRef} from 'react';
 import {connect} from 'react-redux';
 import {signIn} from '../../store/action/auth';
 import styles from './SignUpForm.module.css';
-import {setSuccess, setError} from '../../util/userValidation';
+import {setSuccess, setError, setReqError} from '../../util/userValidation';
 
 const SignInForm = forwardRef(({signInThunk}, formRef) => {
-  const emailRef = useRef();
-  const pwRef = useRef();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = e => {
+  const emailRef = useRef();
+  const pwRef = useRef();
+  const errorRef = useRef();
+
+  const onSubmit = async e => {
     e.preventDefault();
     setSuccess(emailRef);
     setSuccess(pwRef);
@@ -26,7 +28,10 @@ const SignInForm = forwardRef(({signInThunk}, formRef) => {
       email: email.trim(),
       password
     };
-    signInThunk(userData);
+    const error = await signInThunk(userData);
+    if (error) {
+      setReqError(errorRef, error);
+    }
   };
 
   return (
@@ -61,6 +66,9 @@ const SignInForm = forwardRef(({signInThunk}, formRef) => {
             />
           </div>
           <small className={styles.small} />
+        </div>
+        <div ref={errorRef} className={styles.item}>
+          <small className={styles['error-item']} />
         </div>
         <div className={styles['button-item']}>
           <button type="submit" className={styles.button}>

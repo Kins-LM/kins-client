@@ -9,7 +9,7 @@ const userReducer = (state = initialState, action) => {
       return {loading: action.loading};
     }
     case auth.SIGN_IN_SUCCESS: {
-      return {user: action.userData};
+      return {user: action.userData, error: null};
     }
     case auth.SIGN_IN_ERROR: {
       return {error: action.error};
@@ -18,9 +18,18 @@ const userReducer = (state = initialState, action) => {
       return {loading: action.loading};
     }
     case auth.SIGN_UP_SUCCESS: {
-      return {user: action.userData};
+      return {user: action.userData, error: null};
     }
     case auth.SIGN_UP_ERROR: {
+      return {error: action.error};
+    }
+    case auth.SIGN_OUT: {
+      return {loading: action.loading};
+    }
+    case auth.SIGN_OUT_SUCCESS: {
+      return {user: null, error: null};
+    }
+    case auth.SIGN_OUT_ERROR: {
       return {error: action.error};
     }
     default:

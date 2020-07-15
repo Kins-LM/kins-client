@@ -1,4 +1,4 @@
-import {useState, forwardRef, useRef} from 'react';
+import {useEffect, useState, forwardRef, useRef} from 'react';
 import {connect} from 'react-redux';
 import {signUp} from '../../store/action/auth';
 import {
@@ -6,10 +6,12 @@ import {
   validPassword,
   pwConfirm,
   setSuccess,
-  setError
+  setError,
+  setReqError
 } from '../../util/userValidation';
 import styles from './SignUpForm.module.css';
 import SignUpSuccess from './SignUpSuccess';
+import PWToolTips from '../tooltip/PWToolTips';
 
 const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [firstName, setFirstName] = useState('');
@@ -18,11 +20,13 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signUpSuccess, setSignUpSuccess] = useState(false);
+  const [showToolTips, setShowToolTips] = useState(false);
 
   const nameRef = useRef();
   const emailRef = useRef();
   const pwRef = useRef();
   const pwcRef = useRef();
+  const errorRef = useRef();
 
   const validInput = () => {
     let res = 'true';
@@ -39,7 +43,6 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
     }
 
     if (!validPassword(password)) {
-      // TODO: add tooltip
       res = setError(pwRef, 'Click here for password requirements.');
     } else {
       setSuccess(pwRef);
@@ -56,7 +59,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
     return res;
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (validInput()) {
       const userData = {
@@ -65,13 +68,33 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
         email: email.trim(),
         password
       };
-      const result = signUpThunk(userData);
-      if (result === 'sucess') {
+      const error = await signUpThunk(userData);
+      if (error) {
+        setReqError(errorRef, error);
+      } else {
         setSignUpSuccess(true);
       }
-      console.log(result);
     }
   };
+
+  const handleInputClick = e => {
+    e.preventDefault();
+    setShowToolTips(!showToolTips);
+  };
+
+  const handleOutsideClick = e => {
+    e.preventDefault();
+    if (pwRef.current && !pwRef.current.contains(e.target)) {
+      setShowToolTips(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div className={styles['modal-body']}>
@@ -122,9 +145,11 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
                 placeholder="Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+                onClick={handleInputClick}
               />
             </div>
             <small className={styles.small} />
+            {showToolTips ? <PWToolTips /> : null}
           </div>
           <div ref={pwcRef} className={styles.item}>
             <div className={styles['input-item']}>
@@ -139,6 +164,9 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
             </div>
             <small className={styles.small} />
           </div>
+          <div ref={errorRef} className={styles.item}>
+            <small className={styles['error-item']} />
+          </div>
           <div className={styles['button-item']}>
             <button type="submit" className={styles.button}>
               Register
@@ -150,9 +178,7 @@ const SignUpForm = forwardRef(({signUpThunk}, formRef) => {
   );
 });
 
-const mapState = state => ({
-  // user: state.user
-});
+const mapState = state => ({});
 
 const mapDispatch = dispatch => ({
   signUpThunk: data => dispatch(signUp(data))
@@ -161,10 +187,3 @@ const mapDispatch = dispatch => ({
 export default connect(mapState, mapDispatch, null, {forwardRef: true})(
   SignUpForm
 );
-
-// `Password must contain
-//           at least 1 lowercase character
-//           at least 1 uppercase alphabetical character
-//           at least 1 numeric character
-//           at least 1 special character
-//           must be six characters or longer`

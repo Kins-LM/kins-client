@@ -1,26 +1,29 @@
-import {Provider} from 'react-redux';
 import Head from 'next/head';
 
-import store from '../store';
 import Navbar from './navbars/Navbar';
 import Footer from './Footer';
 
 const Layout = ({children}) => {
   return (
     <div>
-      <Provider store={store}>
-        <Head>
-          <title>Kins</title>
-        </Head>
-        <main>
-          <div>
-            <Navbar />
-            {children}
-            <Footer />
-          </div>
-        </main>
-        <style jsx>{``}</style>
-      </Provider>
+      <Head>
+        <title>Kins</title>
+      </Head>
+      <main>
+        <div id="layout-container">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
+        <style jsx>
+          {`
+            #layout-container {
+              display: flex;
+              flex-direction: column;
+            }
+          `}
+        </style>
+      </main>
     </div>
   );
 };

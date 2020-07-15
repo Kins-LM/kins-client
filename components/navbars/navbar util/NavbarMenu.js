@@ -13,7 +13,7 @@ const CourierMenu = ({componentName, menuLinks, linkRoutes}) => {
     return menuLinks.map((link, i) => {
       return (
         <li key={link} className={styles.li}>
-          <Link href={linkRoutes[i]}>
+          <Link href={{pathname: linkRoutes[i]}}>
             <a className={styles.a}>{link}</a>
           </Link>
         </li>

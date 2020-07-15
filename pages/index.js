@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 const Root = () => {
   return (
     <Layout>
-      <div>
+      <div id="home-body">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
           aliquet pulvinar erat, non dapibus odio dignissim et. In erat eros,
@@ -61,6 +61,13 @@ const Root = () => {
           rhoncus id turpis. Integer sit amet augue felis.
         </p>
       </div>
+      <style jsx>
+        {`
+          #home-body {
+            margin-bottom: 100px;
+          }
+        `}
+      </style>
     </Layout>
   );
 };
